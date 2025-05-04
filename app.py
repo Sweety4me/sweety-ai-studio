@@ -1,105 +1,60 @@
 import streamlit as st
 
-# Page Configuration
+# Page settings
 st.set_page_config(page_title="Sweety AI Studio", page_icon="🎬", layout="wide")
 
-# Load Logo and Styles
+# Title + Logo + Tagline
 st.markdown("""
-    <style>
-    .logo {
-        display: flex;
-        justify-content: center;
-        margin-top: -20px;
-        margin-bottom: 10px;
-    }
-    .title-block {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .main-title {
-        font-size: 42px;
-        font-weight: 800;
-        color: #222222;
-    }
-    .sub-title {
-        font-size: 20px;
-        font-weight: 500;
-        color: #555555;
-    }
-    .tool-card {
-        background-color: #ffffff;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-# Show Logo
-st.markdown("""
-    <div class="logo">
-        <img src="https://raw.githubusercontent.com/Sweety4me/sweety-ai-studio/main/assets/Sweety%20logo.png" width="150">
+    <div style='text-align: center;'>
+        <img src='https://raw.githubusercontent.com/Sweety4me/sweety-ai-studio/main/assets/Sweety%20logo.png' width='150'>
+        <h1 style='font-size: 40px; margin-top: 10px; margin-bottom: 0; color: #222;'>Sweety AI Studio</h1>
+        <p style='font-size: 18px; color: #666;'>AI Tools for Modern Filmmakers</p>
     </div>
 """, unsafe_allow_html=True)
 
-# Title & Tagline
-st.markdown("""
-    <div class="title-block">
-        <div class="main-title">Sweety AI Studio</div>
-        <div class="sub-title">AI Tools for Modern Filmmakers</div>
-    </div>
-""", unsafe_allow_html=True)
+st.markdown("---")
 
-# Sidebar Navigation
-st.sidebar.title("🎛️ AI Tools")
-tool = st.sidebar.radio("Select a Tool", [
-    "ScriptShaala", 
-    "FrameFeels", 
-    "PitchPeelu", 
-    "ShootSync",
-    "ShotDivision"  # New Tool added
+# Sidebar
+st.sidebar.title("🎛️ Tools")
+tool = st.sidebar.radio("Choose a tool:", [
+    "📘 ScriptShaala",
+    "🎬 FrameFeels",
+    "📄 PitchPeelu",
+    "📆 ShootSync",
+    "📸 Shot Division"
 ])
 
-# Main Tool Display
-st.markdown("<div class='tool-card'>", unsafe_allow_html=True)
+# Tool Logic
+if tool == "📘 ScriptShaala":
+    st.subheader("📘 ScriptShaala – Generate dialogues & screenplay")
+    st.text_area("Enter scene description", placeholder="Eg: A boy meets girl on a rainy day...")
+    st.button("Generate Script")
+    st.markdown("#### 📝 Output")
+    st.info("Scene 1: INT. COFFEE SHOP – EVENING\n\nA boy sits alone... [Story continues here]\n\n🔜 Full story coming soon...")
 
-if tool == "ScriptShaala":
-    st.subheader("🎬 ScriptShaala – Screenplay Generator")
-    genre = st.selectbox("🎭 Choose Genre", ["Romance", "Action", "Drama", "Thriller"])
-    theme = st.text_input("🧵 Theme or Summary")
-    characters = st.text_area("👥 Characters (comma-separated)", placeholder="Ex: Arjun, Meera")
+elif tool == "🎬 FrameFeels":
+    st.subheader("🎬 FrameFeels – Generate shot-by-shot storyboard")
+    st.info("Tool under construction... coming soon!")
 
-    if st.button("🚀 Generate Script"):
-        st.success("✅ Screenplay Generated")
-        first_char = characters.split(",")[0].strip() if characters else "Character"
-        st.markdown(f"""
-        **🎞️ Title:** *{theme or 'Untitled Project'}*  
-        **🎭 Genre:** {genre}  
-        **👥 Characters:** {characters or 'Not Provided'}  
-        
-        ---
-        **📍 Scene 1**  
-        INT. COFFEE SHOP – DAY  
-        {first_char} sits alone, flipping through an old diary. Raindrops tap the glass.  
-        A stranger enters. Their eyes meet. The story begins...
+elif tool == "📄 PitchPeelu":
+    st.subheader("📄 PitchPeelu – Generate pitch deck PDF")
+    st.info("Tool under construction... wait for Sweety 😘")
 
-        📌 *Full story coming soon... stay tuned!*
-        """)
+elif tool == "📆 ShootSync":
+    st.subheader("📆 ShootSync – Plan your shoot day with a call sheet")
+    st.info("Tool under construction... one step at a time ❤️")
 
-elif tool == "FrameFeels":
-    st.subheader("🖼️ FrameFeels – Storyboard Generator")
-    st.info("Coming soon... visualize each scene frame-by-frame!")
+elif tool == "📸 Shot Division":
+    st.subheader("📸 Shot Division – Scene-wise shot breakdown")
+    st.write("**Scene:** Opening Scene – Hero Introduction")
+    st.write("""
+        1. Wide shot – City view  
+        2. Mid shot – Hero walking  
+        3. Close up – Hero face reveal  
+        4. Tracking shot – Following hero  
+    """)
+    st.success("Dummy output generated. Full tool coming soon!")
 
-elif tool == "PitchPeelu":
-    st.subheader("📄 PitchPeelu – PDF Deck Builder")
-    st.info("Coming soon... auto-generate producer & investor pitch decks!")
-
-elif tool == "ShootSync":
-    st.subheader("📅 ShootSync – Call Sheet Planner")
-    st.info("Coming soon... manage your shoot day like a pro!")
-
-elif tool == "ShotDivision":
-    st.subheader("🎞️ ShotDivision – Scene Breakdown & Shot Planning")
-    st.info("Coming soon... will help you split scenes into shots with angles and camera notes!")
-
-st.markdown("</div>", unsafe_allow_html=True)
+# Footer
+st.markdown("---")
+st.markdown("<p style='text-align: center; color: grey;'>Built with ❤️ by Sweety & Bava | © 2025</p>", unsafe_allow_html=True)

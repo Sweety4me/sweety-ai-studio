@@ -1,0 +1,10 @@
+# Custom sidebar styling
+st.sidebar.markdown("""
+    <style>
+    .sidebar .sidebar-content {
+        background-color: #f0f0f0;
+        padding: 20px;
+        font-size: 18px;
+    }
+    </style>
+""", unsafe_allow_html=True)

@@ -1,16 +1,17 @@
 import streamlit as st
 
-# Page settings
+# Page config
 st.set_page_config(page_title="Sweety AI Studio", page_icon="🎬", layout="wide")
 
-# Title + Logo + Tagline
+# Logo + Title + Tagline
 st.markdown("""
     <div style='text-align: center;'>
         <img src='https://raw.githubusercontent.com/Sweety4me/sweety-ai-studio/main/assets/Sweety%20logo.png' width='150'>
-        <h1 style='font-size: 40px; margin-top: 10px; margin-bottom: 0; color: #222;'>Sweety AI Studio</h1>
-        <p style='font-size: 18px; color: #666;'>AI Tools for Modern Filmmakers</p>
     </div>
 """, unsafe_allow_html=True)
+
+st.markdown("<h1 style='text-align: center; color: #222;'>🎬 Sweety AI Studio</h1>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color: #555;'>AI Tools for Modern Filmmakers</h4>", unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -24,13 +25,29 @@ tool = st.sidebar.radio("Choose a tool:", [
     "📸 Shot Division"
 ])
 
-# Tool Logic
+# Tools
 if tool == "📘 ScriptShaala":
     st.subheader("📘 ScriptShaala – Generate dialogues & screenplay")
-    st.text_area("Enter scene description", placeholder="Eg: A boy meets girl on a rainy day...")
-    st.button("Generate Script")
-    st.markdown("#### 📝 Output")
-    st.info("Scene 1: INT. COFFEE SHOP – EVENING\n\nA boy sits alone... [Story continues here]\n\n🔜 Full story coming soon...")
+    st.write("Enter a scene description and get dummy script output.")
+    scene = st.text_area("Scene Description", placeholder="Eg: A boy meets girl on a rainy day...")
+    if st.button("Generate Dummy Script"):
+        st.markdown("#### 📝 Output Script")
+        st.markdown("""
+        **Scene 1: INT. COFFEE SHOP – EVENING**
+
+        A boy sits alone near the window, raindrops tracing the glass.  
+        A girl enters, looking around. Their eyes meet.
+
+        **BOY**  
+        Is this seat taken?
+
+        **GIRL**  
+        Not anymore.
+
+        **[Story continues...]**
+
+        🔜 *Full story coming soon...*
+        """)
 
 elif tool == "🎬 FrameFeels":
     st.subheader("🎬 FrameFeels – Generate shot-by-shot storyboard")

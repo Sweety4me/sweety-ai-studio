@@ -1,4 +1,7 @@
 import streamlit as st
+from io import BytesIO
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 st.set_page_config(page_title="Sweety AI Studio", page_icon="🎬", layout="wide")
 
@@ -27,6 +30,7 @@ if tool == "📘 ScriptShaala":
 
     if st.button("Generate Dummy Script"):
         st.markdown("### ✨ Generated Script")
+
         dummy_script = f"""
 🎭 Genre: {genre}
 📄 Summary: {summary}
@@ -57,12 +61,25 @@ The taxi pulls away, leaving a splash and a promise behind.
 
         st.text_area("🎥 Script Output", dummy_script.strip(), height=300)
 
-        # Download as TXT
+        # Generate PDF
+        pdf_buffer = BytesIO()
+        c = canvas.Canvas(pdf_buffer, pagesize=letter)
+        textobject = c.beginText(40, 750)
+        textobject.setFont("Helvetica", 12)
+
+        for line in dummy_script.strip().split("\n"):
+            textobject.textLine(line)
+
+        c.drawText(textobject)
+        c.showPage()
+        c.save()
+
+        # PDF Download Button
         st.download_button(
-            label="📥 Download Script as .txt",
-            data=dummy_script,
-            file_name="sweety_script.txt",
-            mime="text/plain"
+            label="📥 Download Script as PDF",
+            data=pdf_buffer.getvalue(),
+            file_name="sweety_script.pdf",
+            mime="application/pdf"
         )
 
 # Tool: FrameFeels
